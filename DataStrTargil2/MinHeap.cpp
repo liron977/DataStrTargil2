@@ -37,7 +37,7 @@ Pair MinHeap::DeleteMin()
 {
     if (heapSize < 1)
     {
-
+       
     }
     Pair min = data[0];
     heapSize--;
@@ -77,14 +77,14 @@ void MinHeap::FixHeap(int node)
 
     if (min != node)
     {
-        Swap(&data[node], &data[min]);
+        Swap(data[node], data[min]);
             FixHeap(min);
     }
 }
-void MinHeap :: Swap(Pair* a, Pair* b) {
-       Pair t = *a;
-        *a = *b;
-        *b = t;
+void MinHeap :: Swap(Pair& a, Pair& b) {
+       Pair t = a;
+        a = b;
+        b = t;
 }
 void MinHeap::Insert(Pair item)
 {
@@ -94,11 +94,12 @@ void MinHeap::Insert(Pair item)
     }
     int i = heapSize;
     heapSize++;
-    while ((i > 0) && (data[Parent(i)].priority < item.priority))
+    while ((i > 0) && (data[Parent(i)].priority > item.priority))
     {
         data[i] = data[Parent(i)];
         i = Parent(i);
     }
     data[i] = item;
+  
 }
 

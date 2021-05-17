@@ -139,10 +139,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Input.h" />
     <ClInclude Include="KWayMerge.h" />
     <ClInclude Include="MinHeap.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Input.cpp" />
     <ClCompile Include="KWayMerge.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MinHeap.cpp" />

@@ -4,8 +4,8 @@
 typedef struct {
 
 	int priority;
-	int startIndex;
-	int lastIndex;
+	//int startIndex;
+	//int lastIndex;
 	int currIndex;
 
 }Pair;
@@ -29,7 +29,7 @@ public:
 	Pair Min();
 	Pair DeleteMin();
 	void Insert(Pair item);
-	void Swap(Pair* a, Pair* b);
+	void Swap(Pair& a, Pair& b);
 	void buildHeap(Pair A[], int n);
 
 };
