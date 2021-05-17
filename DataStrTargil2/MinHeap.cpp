@@ -1,7 +1,7 @@
 #include "MinHeap.h"
 
 
-minHeap::minHeap(int max)
+MinHeap::MinHeap(int max)
 {
     data = new Pair[max];
     maxSize = max;
@@ -9,7 +9,7 @@ minHeap::minHeap(int max)
     allocated = 1;
 }
 
-minHeap::~minHeap()
+MinHeap::~MinHeap()
 {
     if (allocated)
     {
@@ -17,19 +17,23 @@ minHeap::~minHeap()
     }
     data = nullptr ;
 }
-int minHeap::Parent(int node)
+Pair MinHeap::Min()
+{
+    return Pair();
+}
+int MinHeap::Parent(int node)
 {
     return (node - 1) / 2;
 }
-int minHeap::Left(int node)
+ int MinHeap::Left(int node)
 {
     return (2 * node + 1);
 }
-int minHeap::Right(int node)
+int MinHeap::Right(int node)
 {
     return (2 * node + 2);
 }
-Pair minHeap::DeleteMin()
+Pair MinHeap::DeleteMin()
 {
     if (heapSize < 1)
     {
@@ -41,7 +45,8 @@ Pair minHeap::DeleteMin()
     FixHeap(0);
     return min;
 }
-void minHeap::buildHeap(Pair A[], int n) {
+
+void MinHeap::buildHeap(Pair A[], int n) {
 
     heapSize = maxSize = n;
     data = A;
@@ -51,7 +56,7 @@ void minHeap::buildHeap(Pair A[], int n) {
         FixHeap(i);
     }
 }
-void minHeap::FixHeap(int node)
+void MinHeap::FixHeap(int node)
 {
     int min;
     int left = Left(node);
@@ -76,12 +81,12 @@ void minHeap::FixHeap(int node)
             FixHeap(min);
     }
 }
-void minHeap :: Swap(Pair* a, Pair* b) {
+void MinHeap :: Swap(Pair* a, Pair* b) {
        Pair t = *a;
         *a = *b;
         *b = t;
 }
-void minHeap::Insert(Pair item)
+void MinHeap::Insert(Pair item)
 {
     if (heapSize == maxSize)
     {

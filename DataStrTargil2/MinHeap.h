@@ -1,15 +1,16 @@
 #ifndef _MINHEAP_H
-
+#define _MINHEAP_H
 
 typedef struct {
 
 	int priority;
 	int startIndex;
 	int lastIndex;
+	int currIndex;
 
 }Pair;
 
-class minHeap
+class MinHeap
 {
 
 private:
@@ -23,14 +24,13 @@ private:
 	void FixHeap(int node);
 
 public:
-	minHeap(int max);
-	minHeap(int A[], int n);
-	~minHeap();
+	MinHeap(int max);
+	~MinHeap();
 	Pair Min();
 	Pair DeleteMin();
 	void Insert(Pair item);
-	void buildHeap(Pair A[], int n);
 	void Swap(Pair* a, Pair* b);
+	void buildHeap(Pair A[], int n);
 
 };
-#endif
+#endif //_MINHEAP_H

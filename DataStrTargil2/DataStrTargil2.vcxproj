@@ -139,9 +139,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="KWayMerge.h" />
     <ClInclude Include="MinHeap.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="KWayMerge.cpp" />
+    <ClCompile Include="Main.cpp" />
     <ClCompile Include="MinHeap.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
