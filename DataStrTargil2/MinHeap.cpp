@@ -1,5 +1,6 @@
 #include "MinHeap.h"
-
+#include <stdio.h>    
+#include <stdlib.h> 
 
 MinHeap::MinHeap(int max)
 {
@@ -90,7 +91,7 @@ void MinHeap::Insert(Pair item)
 {
     if (heapSize == maxSize)
     {
-        //
+        exit(EXIT_FAILURE);
     }
     int i = heapSize;
     heapSize++;

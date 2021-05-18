@@ -1,5 +1,11 @@
 #ifndef _KWAYMERGE_H
 #define  _KWAYMERGE_H
+using namespace std;
+#include <iostream>
+#include <fstream>
+#include <chrono>
+#include <iomanip>
+#include <math.h>
 
 typedef struct {
 
@@ -19,10 +25,10 @@ public:
 
 	void k_Way_Merge(int arr[], int k, int arr_size);
 	void printArray(int arr[], int size);
-	//void merge(int* arr1, int arr1_size, int arr2_size, int k);
 	void merge(int* arr1, int arr1_size, int k,int* tmp_arr);
 	int findIndex(Indexs* index_arr, int value, int size);
-	int findFirstTaken(Indexs* index_arr, int size);
+	//int findFirstTaken(Indexs* index_arr, int size);
+	void printArrayToFile(int* arr, int arr_size, string outputFileName);
 
 };
 

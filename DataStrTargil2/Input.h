@@ -23,7 +23,11 @@ public:
 	void setFilesName();
 	void getInput();
 	bool isValidNumber(int str_size, char* str) const;
-
+	int getSize() const;
+	void copyArr(int* dest_arr) const;
+	int  getK() const;
+	string getOutputFileName();
+	void freeArray();
 };
 
 

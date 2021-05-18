@@ -9,10 +9,7 @@ void Input::setUserInput() {
     setFilesName();
     getInput();
     kMerge.k_Way_Merge(arr, k, size_arr);
-    //ofstream arrayData("C:\\array.txt"ios::app); // File Creation(on C drive)
-
 }
-
 void Input::setArrSize()
 {
     cin >> size_arr;
@@ -20,7 +17,7 @@ void Input::setArrSize()
         cout << "Wrong input" << endl;
         exit(-1);
     }
-    setSize(size_arr);
+    //setSize(size_arr);
 
 }
 void Input::setK()
@@ -31,7 +28,7 @@ void Input::setK()
         cout << "Wrong input" << endl;
         exit(-1);
     }
-    setIndex(k);
+    //setIndex(k);
 
 }
 bool Input::isValidIndex(int _k) const
@@ -64,7 +61,7 @@ void Input::setFilesName() {
     if (found == string::npos)
         inputFileName += ".txt";
     cin >> outputFileName;
-    size_t found = outputFileName.find(".txt");
+     found = outputFileName.find(".txt");
     if (found == string::npos)
         outputFileName += ".txt";
 }
@@ -74,30 +71,30 @@ void Input::getInput()
     int num;
     char curr_char;
     arr = new int[size_arr];
-    //inputFileName.open("tpoint.txt", ios::in);
-    ifstream myReadFile;
-    myReadFile.open(inputFileName);
+    ifstream myReadFile(inputFileName, ios::in);
     int count = 0, j = 0, i = 0;
     if (myReadFile.is_open()) {
-        while (!myReadFile.eof()) {
-
-            count++;
-            cin.get(curr_char);
-            for (j = 0; j < size_arr; j++)
+            for (j = 0; j < size_arr + 1; j++)
             {
 
-                cin.get(curr_char);
-                while (curr_char != ' ' && curr_char != '\n') //here we get each of the number characters
+                myReadFile.get(curr_char);
+                if (myReadFile.eof())
+                    int x = 1;
+                while (((curr_char != ' ') && (curr_char != '\n')&& (!myReadFile.eof()))) //here we get each of the number characters
                 {
+
                     str[i] = curr_char;
-                    cin.get(curr_char);
+                    myReadFile.get(curr_char);
                     i++;
                 }
                 str[i] = '\n';
+                if (str[0] == '\n')
+                {
+                    continue;
+                }
                 if (isValidNumber(i, str)) // i is the str size
                 {
-                    num =int(atof(str)); //we got a valid number and change its type to double 
-                     //num =std::stod(str, i + 1);
+                    num = int(atof(str)); //we got a valid number and change its type to double 
                     arr[j] = num;
                 }
                 else if (str[0] == '\n' && j == size_arr)
@@ -108,19 +105,15 @@ void Input::getInput()
                     cout << "Wrong input" << endl;
                     exit(-1);
                 }
-        
+                if (j == size_arr)
+                {
+                    cout << "Wrong input" << endl;
+                    exit(-1);
+                }
                 i = 0;
+
             }
-
         }
-        if(count>size_arr)
-        {
-            cout << "Wrong input" << endl;
-            exit(-1);
-        }
-
-
-    }
 }
  bool Input::isValidNumber(int str_size, char* str) const  {
         int i, negative_symbol = 0;
@@ -132,10 +125,7 @@ void Input::getInput()
                 return false;
             }
             if (str[i] == '.') {// if there are more then one point 
-                point_counter++;
-                if (point_counter > 1) {
                     return false;
-                }
             }
             if (str[i] == '-') { //for negative numbers
                 if (i == size_arr - 1)
@@ -147,17 +137,29 @@ void Input::getInput()
                     return false;
                 }
             }
-            if (point_counter == 1) { // if there are more the 4 numbers after the poit
-                counter_num_after_point++;
-                if (counter_num_after_point >= 5)
-                {
-                    return false;
-                }
-            }
-        }
-        if (point_counter != 1 || point_counter == 0 || counter_num_after_point == 0) {//(point_counter == 0)-if the number isn`t decimal number,(point_counter != 1)-in order to make sure that the number has only one point,(counter_num_after_point==0)-to make sure tjat after the point we have number
-            return false;
         }
         return true;
-
     }
+ int  Input::getSize() const
+ {
+     return size_arr;
+ }
+ int  Input::getK() const
+ {
+     return k;
+ }
+ void Input::copyArr(int* dest_arr) const
+ {
+     for (int i = 0; i < size_arr; i++)
+     {
+         dest_arr[i] = arr[i];
+     }
+ }
+ string Input::getOutputFileName()
+ {
+     return outputFileName;
+ }
+ void Input::freeArray()
+ {
+     delete[]arr;
+ }
