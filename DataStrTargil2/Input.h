@@ -1,6 +1,6 @@
 #ifndef _INPUT_H
 #define _INPUT_H
-using namespace std; 
+using namespace std;
 #include <string>
 #include "KWayMerge.h"
 

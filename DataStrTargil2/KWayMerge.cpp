@@ -75,11 +75,12 @@ void KWayMerge::k_Way_Merge(int arr[], int k, int arr_size)
 		cout << "------------" << endl;
 		return;
 	}
+
 	else
 	{
 		int index = 0, tmp = 0;
 		int upper_bound, lower_bounds;
-		upper_bound =int(ceil(+(arr_size / double(k))));
+		upper_bound = int(ceil(+(arr_size / double(k))));
 		lower_bounds = int(floor((arr_size / double(k))));
 		int div = arr_size % k;
 		for (int i = 0; i < div; i++)
@@ -99,13 +100,13 @@ void KWayMerge::k_Way_Merge(int arr[], int k, int arr_size)
 		for (int i = 0; i < arr_size; i++) {
 			arr[i] = tmp_arr[i];
 		}
-		delete []tmp_arr;
+		delete[]tmp_arr;
 	}
 
 
 
 }
-void KWayMerge::merge(int* arr, int arr_size, int k,int* tmp_arr) {
+void KWayMerge::merge(int* arr, int arr_size, int k, int* tmp_arr) {
 
 
 	MinHeap heap(k);
@@ -117,13 +118,13 @@ void KWayMerge::merge(int* arr, int arr_size, int k,int* tmp_arr) {
 	int j = 0;
 	int tmpIndex = 0;
 	Pair* tmp = new Pair[k];
-	for (int i = 0; i < div; i++) {
+	for (int i = 0; i < div; i++) { // filling index array with a minimum of each (upper_bound size) sub-array
 		index_arr[j].index = upper_bound * i;
 		index_arr[j].size = upper_bound;
 		j++;
 	}
-	for (int i = 0; i < k-div; i++) {
-		index_arr[j].index = int(floorRound * i+ upper_bound *div);
+	for (int i = 0; i < k - div; i++) { //// filling index array with a minimum of each (floorRound size) sub-array
+		index_arr[j].index = int(floorRound * i + upper_bound * div);
 		index_arr[j].size = floorRound;
 		j++;
 	}
@@ -132,27 +133,27 @@ void KWayMerge::merge(int* arr, int arr_size, int k,int* tmp_arr) {
 		tmp[i].currIndex = index_arr[i].index;
 		tmp[i].priority = arr[index_arr[i].index];
 	}
-	heap.buildHeap(tmp,k);
+	heap.buildHeap(tmp, k);
 	for (int i = 0; i < arr_size; i++) {
 		Pair p = heap.DeleteMin();
 		tmp_arr[t] = p.priority;
 		int curr_index = p.currIndex;
 		t++;
-		 tmpIndex = findIndex(index_arr, curr_index, k);
-		 if (index_arr[tmpIndex].size > 1) {
-			 index_arr[tmpIndex].index++;
-			 index_arr[tmpIndex].size--;
-			 Pair pTmp = { arr[index_arr[tmpIndex].index],index_arr[tmpIndex].index };
-			 heap.Insert(pTmp);
-		 }
+		tmpIndex = findIndex(index_arr, curr_index, k); //return the num index in the origin arr 
+		if (index_arr[tmpIndex].size > 1) {
+			index_arr[tmpIndex].index++;
+			index_arr[tmpIndex].size--; // decreasing sub-array size 
+			Pair pTmp = { arr[index_arr[tmpIndex].index],index_arr[tmpIndex].index };
+			heap.Insert(pTmp);
+		}
 	}
 
-	delete []index_arr;
+	delete[]index_arr;
 	delete[]tmp;
 
 }
 
-int KWayMerge::findIndex(Indexs* index_arr, int value,int size)
+int KWayMerge::findIndex(Indexs* index_arr, int value, int size)const
 {
 	for (int i = 0; i < size; i++) {
 
@@ -173,8 +174,8 @@ int KWayMerge::findIndex(Indexs* index_arr, int value,int size)
 void KWayMerge::printArrayToFile(int* arr, int arr_size, string outputFileName)
 {
 	ofstream myfile(outputFileName, ios::app);
-		for (int i = 0; i < arr_size; i++) {
-			myfile << arr[i] << endl;
-		}
-		myfile.close();
+	for (int i = 0; i < arr_size; i++) {
+		myfile << arr[i] << endl;
+	}
+	myfile.close();
 }

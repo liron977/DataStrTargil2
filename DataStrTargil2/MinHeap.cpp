@@ -16,7 +16,7 @@ MinHeap::~MinHeap()
     {
         delete[] data;
     }
-    data = nullptr ;
+    data = nullptr;
 }
 Pair MinHeap::Min()
 {
@@ -26,7 +26,7 @@ int MinHeap::Parent(int node)
 {
     return (node - 1) / 2;
 }
- int MinHeap::Left(int node)
+int MinHeap::Left(int node)
 {
     return (2 * node + 1);
 }
@@ -38,7 +38,7 @@ Pair MinHeap::DeleteMin()
 {
     if (heapSize < 1)
     {
-       
+
     }
     Pair min = data[0];
     heapSize--;
@@ -79,13 +79,13 @@ void MinHeap::FixHeap(int node)
     if (min != node)
     {
         Swap(data[node], data[min]);
-            FixHeap(min);
+        FixHeap(min);
     }
 }
-void MinHeap :: Swap(Pair& a, Pair& b) {
-       Pair t = a;
-        a = b;
-        b = t;
+void MinHeap::Swap(Pair& a, Pair& b) {
+    Pair t = a;
+    a = b;
+    b = t;
 }
 void MinHeap::Insert(Pair item)
 {
@@ -101,6 +101,5 @@ void MinHeap::Insert(Pair item)
         i = Parent(i);
     }
     data[i] = item;
-  
-}
 
+}
