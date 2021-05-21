@@ -38,7 +38,7 @@ Pair MinHeap::DeleteMin()
 {
     if (heapSize < 1)
     {
-
+        exit(EXIT_FAILURE);
     }
     Pair min = data[0];
     heapSize--;

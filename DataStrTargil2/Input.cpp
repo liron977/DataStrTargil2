@@ -3,12 +3,12 @@
 #include <fstream>
 void Input::setUserInput() {
 
-    KWayMerge kMerge;
+  
     setArrSize();
     setK();
     setFilesName();
     getInput();
-    kMerge.k_Way_Merge(arr, k, size_arr);
+
 }
 void Input::setArrSize()
 {
@@ -60,10 +60,20 @@ void Input::setFilesName() {
     size_t found = inputFileName.find(".txt");
     if (found == string::npos)
         inputFileName += ".txt";
+    ifstream myReadFile(inputFileName, ios::in);
+    if (!myReadFile.is_open()) {
+        cout << "Wrong input" << endl;
+        exit(-1);
+    }
     cin >> outputFileName;
     found = outputFileName.find(".txt");
     if (found == string::npos)
         outputFileName += ".txt";
+    ifstream myWriteFile(outputFileName, ios::in);
+    if (!myReadFile.is_open()) {
+        cout << "Wrong input" << endl;
+        exit(-1);
+    }
 }
 void Input::getInput()
 {
@@ -94,7 +104,7 @@ void Input::getInput()
             }
             if (isValidNumber(i, str)) // i is the str size
             {
-                num = int(atof(str)); //we got a valid number and change its type to double 
+                num = int(atof(str)); //we got a valid number and change its type to int 
                 arr[j] = num;
             }
             else if (str[0] == '\n' && j == size_arr)

@@ -3,7 +3,7 @@
 #include "Input.h"
 #include <string>
 
-void main() {
+int main() {
 
 	Input i;
 	KWayMerge k;
