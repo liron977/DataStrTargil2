@@ -14,8 +14,7 @@ void Input::setArrSize()
 {
     cin >> size_arr;
     if (size_arr < 1) {
-        cout << "Wrong input" << endl;
-        exit(-1);
+        wrongInput();
     }
     //setSize(size_arr);
 
@@ -25,8 +24,7 @@ void Input::setK()
 
     cin >> k;
     if (!isValidIndex(k)) {
-        cout << "Wrong input" << endl;
-        exit(-1);
+        wrongInput();
     }
     //setIndex(k);
 
@@ -106,25 +104,32 @@ void Input::getInput()
             {
                 num = int(atof(str)); //we got a valid number and change its type to int 
                 arr[j] = num;
+                count++;
+
             }
             else if (str[0] == '\n' && j == size_arr)
             {
                 break;
             }
             else {
-                cout << "Wrong input" << endl;
-                exit(-1);
+                wrongInput();
             }
             if (j == size_arr)
             {
-                cout << "Wrong input" << endl;
-                exit(-1);
+                wrongInput();
             }
             i = 0;
 
         }
     }
+    if (count != size_arr)
+        wrongInput();
 }
+bool Input::wrongInput() const {
+    cout << "Wrong input" << endl;
+    exit(-1);
+}
+
 bool Input::isValidNumber(int str_size, char* str) const {
     int i, negative_symbol = 0;
     int counter_num_after_point = -1; // cuase in same iterstion we'r checking point_counter == 1

@@ -68,7 +68,7 @@ void KWayMerge::printArray(int arr[], int size)
 
 void KWayMerge::k_Way_Merge(int arr[], int k, int arr_size)
 {
-	if (arr_size <= k)
+	if ((arr_size <= k)||(k==1))
 	{
 		quickSort(arr, 0, arr_size - 1);
 	/*	printArray(arr, arr_size);

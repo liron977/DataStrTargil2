@@ -20,6 +20,7 @@ class Input
 	void getInput();
 	bool isValidNumber(int str_size, char* str) const;
 	void setK();
+	bool wrongInput() const;
 
 public:
 	void setUserInput();
