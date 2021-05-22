@@ -12,11 +12,11 @@ void Input::setUserInput() {
 }
 void Input::setArrSize()
 {
+
     cin >> size_arr;
     if (size_arr < 1) {
         wrongInput();
     }
-    //setSize(size_arr);
 
 }
 void Input::setK()
@@ -26,7 +26,6 @@ void Input::setK()
     if (!isValidIndex(k)) {
         wrongInput();
     }
-    //setIndex(k);
 
 }
 bool Input::isValidIndex(int _k) const
@@ -45,13 +44,6 @@ bool Input::isValidIndex(int _k) const
     }
     return true;
 }
-void Input::setIndex(int _k) {
-    k = _k;
-}
-void Input::setSize(int _size_arr) {
-    size_arr = _size_arr;
-
-}
 void Input::setFilesName() {
 
     cin >> inputFileName;
@@ -59,9 +51,8 @@ void Input::setFilesName() {
     if (found == string::npos)
         inputFileName += ".txt";
     ifstream myReadFile(inputFileName, ios::in);
-    if (!myReadFile.is_open()) {
-        cout << "Wrong input" << endl;
-        exit(-1);
+    if (!myReadFile.is_open()) {//If the file does not exist or any other reason why the file can not be opned 
+        wrongInput();
     }
     cin >> outputFileName;
     found = outputFileName.find(".txt");
@@ -69,8 +60,7 @@ void Input::setFilesName() {
         outputFileName += ".txt";
     ifstream myWriteFile(outputFileName, ios::in);
     if (!myReadFile.is_open()) {
-        cout << "Wrong input" << endl;
-        exit(-1);
+        wrongInput();
     }
 }
 void Input::getInput()

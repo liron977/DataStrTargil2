@@ -38,7 +38,7 @@ Pair MinHeap::DeleteMin()
 {
     if (heapSize < 1)
     {
-        exit(EXIT_FAILURE);
+        exit(EXIT_FAILURE);/*was taken from http://www.cplusplus.com/reference/cstdlib/exit/ */
     }
     Pair min = data[0];
     heapSize--;

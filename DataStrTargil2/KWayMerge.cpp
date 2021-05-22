@@ -7,58 +7,52 @@ using namespace std;
 #include <fstream>
 
 // A utility function to swap two elements
-void KWayMerge::swap(int* a, int* b)
+void KWayMerge::swap(int* a, int* b) const
 {
 	int t = *a;
 	*a = *b;
 	*b = t;
 }
+int KWayMerge::partitionV1(int arr[], int left, int right) const {
 
-/* This function takes last element as pivot, places
-the pivot element at its correct position in sorted
-	array, and places all smaller (smaller than pivot)
-to left of pivot and all greater elements to right
-of pivot */
-int KWayMerge::partition(int arr[], int low, int high)
-{
-	int pivot = arr[high]; // pivot
-	int i = (low - 1); // Index of smaller element
-
-	for (int j = low; j <= high - 1; j++)
-	{
-		// If current element is smaller than or
-		// equal to pivot
-		if (arr[j] <= pivot)
-		{
-			i++; // increment index of smaller element
-			swap(&arr[i], &arr[j]);
+	int pivot = left;
+	int index = right;
+	while (pivot != index) {
+		if (pivot < index) {
+			if (arr[pivot] >= arr[index]) {
+				swap(&arr[pivot], &arr[index]);
+				int newIndex = pivot + 1;
+				pivot = index;
+				index = newIndex;
+			}
+			else {
+				index--;
+			}
+		}
+		else {
+			if (arr[pivot] >= arr[index]) {
+				index++;
+			}
+			else {
+				swap(&arr[pivot], &arr[index]);
+				int newIndex = pivot - 1;
+				pivot = index;
+				index = newIndex;
+			}
 		}
 	}
-	swap(&arr[i + 1], &arr[high]);
-	return (i + 1);
+	return pivot;
 }
-
-/* The main function that implements QuickSort
-arr[] --> Array to be sorted,
-low --> Starting index,
-high --> Ending index */
-void KWayMerge::quickSort(int arr[], int low, int high)
+void KWayMerge::quickSort(int arr[], int low, int high)const
 {
 	if (low < high)
 	{
-		/* pi is partitioning index, arr[p] is now
-		at right place */
-		int pi = partition(arr, low, high);
-
-		// Separately sort elements before
-		// partition and after partition
+		int pi = partitionV1(arr, low, high);
 		quickSort(arr, low, pi - 1);
 		quickSort(arr, pi + 1, high);
 	}
 }
-
-/* Function to print an array */
-void KWayMerge::printArray(int arr[], int size)
+void KWayMerge::printArray(int arr[], int size) const
 {
 	int i;
 	for (i = 0; i < size; i++)
@@ -66,13 +60,11 @@ void KWayMerge::printArray(int arr[], int size)
 	printf("\n");
 }
 
-void KWayMerge::k_Way_Merge(int arr[], int k, int arr_size)
+void KWayMerge::k_Way_Merge(int arr[], int k, int arr_size) 
 {
 	if ((arr_size <= k)||(k==1))
 	{
 		quickSort(arr, 0, arr_size - 1);
-	/*	printArray(arr, arr_size);
-		cout << "------------" << endl;*/
 		return;
 	}
 
@@ -101,11 +93,11 @@ void KWayMerge::k_Way_Merge(int arr[], int k, int arr_size)
 		delete[]tmp_arr;
 	}
 }
-void KWayMerge::merge(int* arr, int arr_size, int k, int* saver_arr) {
+void KWayMerge::merge(int* arr, int arr_size, int k, int* saver_arr) const {
 	MinHeap heap(k);
 	int div = arr_size % k;
 	int upper_bound =int(ceil(+(arr_size / double(k))));
-	int floorRound = int(floor((arr_size / double(k))));
+	int lower_bounds = int(floor((arr_size / double(k))));
 	Indexs* index_arr = new Indexs[k];
 	int t = 0,j=0, tmp_index =0;
 	Pair* pair_arr = new Pair[k];
@@ -114,9 +106,9 @@ void KWayMerge::merge(int* arr, int arr_size, int k, int* saver_arr) {
 		index_arr[j].size = upper_bound;
 		j++;
 	}
-	for (int i = 0; i < k - div; i++) { //// filling index array with a minimum of each (floorRound size) sub-array
-		index_arr[j].index = (floorRound * i + upper_bound * div);
-		index_arr[j].size = floorRound;
+	for (int i = 0; i < k - div; i++) { //// filling index array with a minimum of each (lower_bounds size) sub-array
+		index_arr[j].index = (lower_bounds * i + upper_bound * div);
+		index_arr[j].size = lower_bounds;
 		j++;
 	}
 	for (int i = 0; i < k; i++) {
@@ -156,17 +148,7 @@ int KWayMerge::findIndex(Indexs* index_arr, int value, int size)const
 	return -1;
 
 }
-//int KWayMerge::findFirstTaken(Indexs* index_arr, int size) {
-//
-//	for (int i = 0; i < size; i++) {
-//
-//		if (index_arr[i].size !=1)
-//			return i;
-//	}
-//	return -1;
-//
-//}
-void KWayMerge::printArrayToFile(int* arr, int arr_size, string outputFileName)
+void KWayMerge::printArrayToFile(int* arr, int arr_size, string outputFileName) const
 {
 	ofstream myfile(outputFileName, ios::app);
 	for (int i = 0; i < arr_size; i++) {

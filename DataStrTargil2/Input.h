@@ -14,8 +14,6 @@ class Input
 
 	void setArrSize();
 	bool isValidIndex(int _index) const;
-	void setIndex(int _index);
-	void setSize(int _size_arr);
 	void setFilesName();
 	void getInput();
 	bool isValidNumber(int str_size, char* str) const;

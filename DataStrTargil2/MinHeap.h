@@ -4,8 +4,6 @@
 typedef struct {
 
 	int priority;
-	//int startIndex;
-	//int lastIndex;
 	int currIndex;
 
 }Pair;
